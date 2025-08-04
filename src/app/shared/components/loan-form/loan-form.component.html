@@ -1,0 +1,86 @@
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <mat-stepper linear #stepper>
+            <mat-step [stepControl]="personalDetailForm" isEditable>
+                <form [formGroup]="personalDetailForm">
+                    <ng-template matStepLabel>Personal Details</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" required>
+                        <mat-error *ngIf="f['name'].touched && personalDetailForm.get('name')?.hasError('required')">Name is required field.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" required placeholder="jhon@gmail.com">
+                        <mat-error *ngIf="personalDetailForm.get('email')?.touched && personalDetailForm.get('email')?.hasError('required')">Email is required field.</mat-error>
+                        <mat-error *ngIf="personalDetailForm.get('email')?.dirty && personalDetailForm.get('email')?.hasError('pattern')">Invalid Email Id. eg.{{'(jhon@gmail.com)'}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput required formControlName="phone">
+                        <mat-error *ngIf="f['phone'].touched && f['phone'].hasError('required')"> Phone is required field.</mat-error>
+                        <mat-error *ngIf="f['phone'].dirty && f['phone'].hasError('phoneNumberValErr')">{{f['phone'].errors?.['phoneNumberValErr']}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" formControlName="dob">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                        <mat-error *ngIf="f['dob'].touched && f['dob'].hasError('required')">Date of Birth is required field.</mat-error>
+                        <mat-error *ngIf="f['dob'].dirty && f['dob'].hasError('dobErrMsg')">{{f['dob'].errors?.['dobErrMsg']}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender" required>
+                            <mat-option value="male">Male</mat-option>
+                            <mat-option value="female">Female</mat-option>
+                            <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['gender'].touched && f['gender'].hasError('required')">Gender is required field.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Marital Status</mat-label>
+                        <mat-select formControlName="maritalStatus" required>
+                            <mat-option value="single">Single</mat-option>
+                            <mat-option value="married">Married</mat-option>
+                            <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="f['maritalStatus'].touched && f['maritalStatus'].hasError('required')">Marital Status is required field.</mat-error>
+                    </mat-form-field>
+                    <button mat-button matStepperNext>Next</button>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="documentForm">
+                <ng-template matStepLabel>Documents Details</ng-template>
+                <form [formGroup]="documentForm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Pan Number</mat-label>
+                        <input matInput formControlName="pan" required>
+                        <mat-error *ngIf="documentForm.get('pan')?.touched && documentForm.get('pan')?.hasError('required')">Pan Number is required field.</mat-error>
+                        <mat-error *ngIf="documentForm.get('pan')?.dirty && documentForm.get('pan')?.hasError('pattern')">Enter Valid Pan Number. eg.{{'(ABCDE1234F)'}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Aadhar Number</mat-label>
+                        <input matInput formControlName="aadhar" required>
+                        <mat-error *ngIf="documentForm.get('aadhar')?.touched && documentForm.get('aadhar')?.hasError('required')">Aadhar Number is required field.</mat-error>
+                        <mat-error *ngIf="documentForm.get('aadhar')?.dirty && documentForm.get('aadhar')?.hasError('pattern')">Enter Valid Aadhar Number. (e.g. 1234 1234 1234)</mat-error>
+                    </mat-form-field>
+                </form>
+            </mat-step>
+        </mat-stepper>
+    </div>
+</div>
